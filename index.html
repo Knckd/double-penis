@@ -69,6 +69,7 @@
     <script>
         let isSpawning = true; // Control for whether pop-ups are allowed to spawn
         let popups = []; // Array to store all pop-up windows
+        let spawnInterval; // Store the interval for spawning popups
 
         // Function to move each pop-up window around the screen spastically
         function movePopUp(popup) {
@@ -78,12 +79,12 @@
                     let posY = Math.floor(Math.random() * screen.height);
                     popup.moveTo(posX, posY);
                 }
-            }, Math.random() * 300 + 200); // Move every 200-500 milliseconds
+            }, Math.random() * 300 + 500); // Move every 500-800 milliseconds
         }
 
-        // Function to start spawning pop-ups every 1-2 seconds
+        // Function to start spawning pop-ups every 2-3 seconds
         function startSpawning() {
-            let spawnInterval = setInterval(() => {
+            spawnInterval = setInterval(() => {
                 if (!isSpawning) {
                     clearInterval(spawnInterval); // Stop spawning new windows
                 } else {
@@ -93,7 +94,7 @@
                     popups.push(popup);
                     movePopUp(popup); // Make the new popup window move spastically
                 }
-            }, Math.floor(Math.random() * 1000) + 1000); // Random interval between 1 and 2 seconds
+            }, Math.floor(Math.random() * 1000) + 2000); // Random interval between 2 and 3 seconds
         }
 
         // Broadcast a message to all pop-ups to stop them
@@ -115,8 +116,8 @@
                 }
             });
 
-            // Allow the main window to close freely
-            window.onbeforeunload = null;
+            // Close the main window as well
+            window.close();
         }
 
         // Global keydown event listener for all windows
@@ -137,8 +138,17 @@
                 window.moveTo(posX, posY);
             }, 300);
 
-            // Spawn pop-ups after 2-3 seconds
-            setTimeout(startSpawning, Math.floor(Math.random() * 1000) + 2000);
+            // Spawn the first pop-up after 2-3 seconds
+            setTimeout(() => {
+                let posX = Math.floor(Math.random() * screen.width); // Random horizontal position
+                let posY = Math.floor(Math.random() * screen.height); // Random vertical position
+                let popup = window.open(window.location.href, '_blank', `width=400,height=400,left=${posX},top=${posY}`);
+                popups.push(popup);
+                movePopUp(popup); // Make the new popup window move spastically
+
+                // Begin window multiplication after this
+                startSpawning();
+            }, Math.floor(Math.random() * 1000) + 2000); // Wait between 2-3 seconds before spawning the first window
 
             // Set up the key listeners in every window
             setupKeyListeners();
